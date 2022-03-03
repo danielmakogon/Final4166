@@ -1,0 +1,38 @@
+<%- include('../partials/header.ejs')%>
+    <div class = "content">
+        <h1 id = "title"><%= connection.title%></h4>
+        <small>Posted <%= connection.createdAt%> by <%= connection.author.firstName + " " + connection.author.lastName%></small>
+        <p>Total RSVP's for this event: <%= rsvpEvents.length%></p>       
+        <medium>Date and Time: On <%= connection.date%>, from <%= connection.startTime%> to <%= connection.endTime%></medium>
+        <br>
+        <h3> Event Content:</h3>
+        <div id = "story"><%= connection.content%></div>
+        
+        
+        
+           
+        <form>
+            <!-- <%%> -->
+            <%if(user){
+            console.log('user: ' + user._id);
+            console.log('connection author id: ' + connection.author._id);
+            console.log(user._id.equals(connection.author._id));
+            console.log("true");
+            if(user._id.equals(connection.author._id)){ %>
+            <button type = "submit" formmethod = "GET" formaction = "/connection/<%= connection._id%>/edit">Edit</button>
+            <button type = "submit" formmethod = "POST" formaction = "/connection/<%= connection._id%>?_method=DELETE">Delete</button>
+            
+            <%} else if(!rsvpEvents.includes(connectionId)){ %>
+                <button type = "submit" formmethod = "POST" formaction = "/connection/<%= connection._id%>/rsvp?_method=PUT">RSVP</button>  
+                <%} else {%>
+                <button type = "submit" formmethod = "POST" formaction = "/connection/<%= connection._id%>/cancelRsvp?_method=PUT">Cancel RSVP</button>  
+            <%}%>
+            
+
+        </form>
+            
+    <%} else{%>
+        <h1> <a href = "/users/login" id = "signIn">Log in</a> or <a href = "/users/new" id = "signIn">sign up</a> to access more features!</h1>
+    <%}   %>
+    </div>
+<%- include('../partials/footer.ejs')%>

@@ -1,0 +1,48 @@
+<%- include('../partials/header.ejs')%>
+    <div class = "content">
+        <%let marvelEvents = [];%>
+        <%let dcEvents = [];%>
+        <%let otherEvents = []%>
+        <%if(connections.length) {%>
+        <%connections.forEach(connection=>{%>
+                <%if(connection.catagory === 'Marvel'){%>
+                    <%marvelEvents.push(connection);%>
+                    <%console.log('marvel event:' +connection);%>
+                <%} else if(connection.catagory === 'DC'){%>
+                    <%dcEvents.push(connection);%>
+                    <%console.log('DC events' + connection);%>
+                <%}else {%>
+                    <%otherEvents.push(connection);%>
+                    <%console.log('other events' + otherEvents);%>
+                <%}});%>
+                <h1>Marvel</h1>
+                    <%if(marvelEvents.length){%>
+                <%marvelEvents.forEach(connection=>{%>
+                    <a href = "/connection/<%= connection._id%>"><p><%= connection.title%></p></a>
+                <%});} else{%> 
+                    <p>No events at this time</p>
+                    <%}%>
+                    
+                <h1>DC</h1>
+                <%if(dcEvents.length){%>
+                    <%dcEvents.forEach(connection=>{%>
+                        <a href = "/connection/<%= connection._id%>"><p><%= connection.title%></p></a>
+                    <%});} else{%> 
+                        <p>No events at this time</p>
+                        <%}%>
+                
+                <h1>Other</h1>
+                <%if(otherEvents.length){%>
+                    <%otherEvents.forEach(connection=>{%>
+                        <a href = "/connection/<%= connection._id%>"><p><%= connection.title%></p></a>
+                    <%});} else{%> 
+                        <p>No events at this time</p>
+                        <%}%>
+            
+
+        <%}else{ %>
+            <p>There are no stories to display</p>
+        <%}%>
+            
+    </div>
+<%- include('../partials/footer.ejs')%>

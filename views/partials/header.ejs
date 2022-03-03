@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>DCC</title>
+</head>
+<body>
+    <nav>
+        <!-- img not loading -->
+        <!-- <img src="/images/comic-sound-effect.jpg"> -->
+        <h2>Danny's Comic Convention</h2>
+        <%if(!user){%>
+            <h1><%= name%></h1>
+            <a href = "/users/login" id = "userLinks">Login</a>
+            <a href = "/users/new" id = "userLinks">Sign Up</a>
+            <a href='/'>Home</a>
+            <a href='/connection'>Events</a>
+        <%} else{%>
+            <h1><%= name%></h1>
+            <a href='/'>Home</a>
+            <a href = "/users/profile" id = "userLinks">Profile</a>
+            <a href='/connection'>Events</a>
+            <a href='/connection/newConnection'>Add a New Event</a>
+            <a href = "/users/logout" id = "userLinks">Log Out</a>
+        <%}%>
+        
+    </nav>
+
+    <%if(errorMessages.length > 0) {
+        errorMessages.forEach(message=>{%>
+            <div class = 'error'><%=message%></div>
+     <%   })
+    }%>
+    <%if(successMessages.length > 0) {
+        successMessages.forEach(message=>{%>
+            <div class = 'success'><%=message%></div>
+     <%   })
+    }%>

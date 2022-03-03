@@ -1,0 +1,35 @@
+<%- include('../partials/header.ejs')%>
+<div class = "content">
+    <h2>Welcome, <%= user.firstName + " " + user.lastName%></h2>
+    <h3> Your Events</h3>
+    <%if (connections.length) {
+        console.log("TRUE");
+        connections.forEach(connection=>{%>
+            <a href = '/connection/<%= connection.id %>'><p><%= connection.title%></p></a>
+       <% })%>
+    <%} else { %>
+        <p>You have not created any events yet</p>
+    <%}%>
+    <h3>Events you have RSVP'd for</h3>
+    <%rsvpEventIDList = user.rsvpEvents;%>
+    <%console.log(rsvpEventIDList);%>
+    <%if(rsvpEventData.length > 0) {%>
+
+       <% for(let i = 0; i < user.rsvpEvents.length; i++){%>
+        <%console.log(user.rsvpEvents);%>
+            <a href = '/connection/<%= user.rsvpEvents[i] %>'><p><%=  rsvpEventData[i].title%></p></a>
+       <% }%>
+    <%} else { %>
+        <p>You have not RSVP'd for any events yet</p>
+    <%}%>
+
+
+
+</div>
+
+
+</body>
+
+</html>
+
+<button type='submit'>Submit</button>
